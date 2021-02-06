@@ -930,12 +930,6 @@
                                     <real value="3.4028234663852886e+38"/>
                                 </customSpacing>
                             </stackView>
-                            <imageView focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="bgP-R4-hhv">
-                                <rect key="frame" x="472" y="200" width="256" height="194"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <imageCell key="cell" refusesFirstResponder="YES" focusRingType="none" alignment="left" animates="YES" imageScaling="proportionallyDown" image="SpaceShipBlue" id="EZS-pY-pJJ"/>
-                                <color key="contentTintColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                            </imageView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" id="WQJ-6a-oMf">
                                 <rect key="frame" x="528" y="503" width="144" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -953,6 +947,22 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
+                            <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bRD-8d-JDc">
+                                <rect key="frame" x="542" y="316" width="128" height="119"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="SpaceShip" id="RiJ-nE-yxJ"/>
+                            </imageView>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FH8-qY-odg">
+                                <rect key="frame" x="569" y="269" width="75" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Weiter" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zr2-1v-fG7">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="spaceShipImageButtonClicked:" target="UI9-9U-x1M" id="fim-Bz-saA"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </customView>
                     <connections>
@@ -962,6 +972,7 @@
                         <outlet property="liveCountCB" destination="60F-m7-aNl" id="gO0-lr-BYH"/>
                         <outlet property="resetHighScoreCB" destination="e2y-iw-j6Z" id="2tE-ct-jog"/>
                         <outlet property="sfxOnCB" destination="4G5-Hg-LsW" id="nPo-hH-Hlw"/>
+                        <outlet property="spaceShipImageView" destination="bRD-8d-JDc" id="bsU-jC-j4W"/>
                         <outlet property="unlimitedLive" destination="zTd-cY-CV1" id="Kpu-pf-dOE"/>
                         <outlet property="unlimitedLiveCB" destination="zTd-cY-CV1" id="SAa-9P-tm6"/>
                     </connections>
@@ -972,6 +983,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SpaceShipBlue" width="153.60000610351562" height="153.60000610351562"/>
+        <image name="SpaceShip" width="122.87999725341797" height="122.87999725341797"/>
     </resources>
 </document>

@@ -7,6 +7,9 @@
 
 import Foundation
 
+//  verfuegbare Raumschiffe
+internal let SpaceShipImageNames: [String] = ["SpaceShip", "SpaceShip1", "SpaceShip2", "SpaceShip3"]
+    
 //  categoryBitMask-Values
 internal struct PhysicsCategories {
     

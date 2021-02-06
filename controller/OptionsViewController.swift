@@ -19,11 +19,14 @@ class OptionsViewController: NSViewController {
     @IBOutlet weak var sfxOnCB: NSButton!
     @IBOutlet weak var backgroundMusicOnCB: NSButton!
     @IBOutlet weak var unlimitedLiveCB: NSButton!
+    @IBOutlet weak var spaceShipImageView: NSImageView!
     
     //  Klassenvariablen
     //  Benutzer-Einstellungen (aus Options)
     var userSettings = UserDefaults.standard
     
+    //  Bilder der Raumschiffe
+    var spaceShipImageNumber: Int = 0
     
     //  View mit Werten befuellen
     fileprivate func initializeView() {
@@ -94,11 +97,30 @@ class OptionsViewController: NSViewController {
             unlimitedLiveCB.state = NSControl.StateValue.off
             
         }
-        
         //  High-Score anzeigen
         if userSettings.integer(forKey: UserSettingsKeys.highScore) > 0 {
         
             highScoreLabel.stringValue = "aktuell: \(userSettings.integer(forKey: UserSettingsKeys.highScore))"
+            
+        }
+        //  ausgewaehltes Raumschiff
+        if spaceShipImageNumber < SpaceShipImageNames.count {
+            
+            //  Bild laden
+            guard let spaceShipImage: NSImage = NSImage(named: userSettings.string(forKey: UserSettingsKeys.spaceShipImageName)
+                                                            ?? SpaceShipImageNames[0] + ".png") else {
+                return
+            }
+            spaceShipImageView.image = spaceShipImage
+                    
+            
+            spaceShipImageNumber += 1
+
+            if spaceShipImageNumber == SpaceShipImageNames.count {
+                
+                spaceShipImageNumber = 0
+                
+            }
             
         }
         
@@ -106,6 +128,34 @@ class OptionsViewController: NSViewController {
     
     //  Events aus View
     //
+    //  Raumschiff auswaehlen
+    
+   
+    
+    @IBAction func spaceShipImageButtonClicked(_ sender: NSButton) {
+        
+        // naechstes Bild anzeigen
+        if spaceShipImageNumber < SpaceShipImageNames.count {
+            
+            //  Bild laden
+            guard let spaceShipImage: NSImage = NSImage(named: SpaceShipImageNames[spaceShipImageNumber] + ".png") else {
+                        return
+            }
+            spaceShipImageView.image = spaceShipImage
+                    
+            
+            spaceShipImageNumber += 1
+
+            if spaceShipImageNumber == SpaceShipImageNames.count {
+                
+                spaceShipImageNumber = 0
+                
+            }
+            
+        }
+        
+    }
+    
     //  Einstellungen speichern
     @IBAction func saveButtonClicked(_ sender: NSButton) {
     
@@ -151,11 +201,17 @@ class OptionsViewController: NSViewController {
             userSettings.setValue(0, forKey: UserSettingsKeys.highScore)
             
         }
+        
+        //  Bild unseres Raumschiffes
+        let spaceShipImageName = spaceShipImageView.image?.name() ?? SpaceShipImageNames.first
+        userSettings.setValue(spaceShipImageName, forKey: UserSettingsKeys.spaceShipImageName)
+                                                                            
+        //  View schliessen
         self.view.window?.close()
     }
     
     //  View schliessen - kein Speichern
-    //  version 1.1 bei getaetigten Aenderungen vorherfragen
+    //  Version 1.1 bei getaetigten Aenderungen vorherfragen
     @IBAction func cancelButtonClicked(_ sender: NSButton) {
         
         self.view.window?.close()

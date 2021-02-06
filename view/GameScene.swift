@@ -42,6 +42,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var backgroundAudioPlayer = AVAudioPlayer()
     var isBackgroundSoundOn: Bool = true
     
+    //  Button zum Menu
+    let menuButtonNode = SKSpriteNode(imageNamed: "menuButton")
+    
     //  Timer zum Erscheinen von Objekten
     var enemyShipTimer = Timer()
     var astroidTimer = Timer()
@@ -152,6 +155,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundImage1.size = self.size
         // z-Achse, 0 also derzeit die "unterste" Ebene
         backgroundImage1.zPosition = 0
+        
         self.addChild(backgroundImage1)
         
         backgroundImage2.anchorPoint = CGPoint.zero
@@ -159,8 +163,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         backgroundImage2.position.x = 0
         backgroundImage2.position.y = self.size.height - 5
         backgroundImage2.size = self.size
-        backgroundImage2.zPosition = 0 //
+        backgroundImage2.zPosition = 0
+        
         self.addChild(backgroundImage2)
+        
+        //  Button - zurueck zum Menue
+        menuButtonNode.position.x = self.size.width - menuButtonNode.size.width - 10
+        menuButtonNode.position.y = menuButtonNode.size.height + 10
+        menuButtonNode.zPosition = 10
+        
+        self.addChild(menuButtonNode)
         
     }
     
@@ -289,6 +301,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemyShipScoreTextLabel.name = NodeNames.enemyShipScoreTextLabel
         
         self.addChild(enemyShipScoreTextLabel)
+        
     }
     
     //  Raumschiff vorbereiten
@@ -311,7 +324,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         }
         
-       //  Schiff in Szene positionieren
+        //  Groesse des Raumschiffs in Relation zur Szene
+        
+        
+        //  Schiff in Szene positionieren
         spaceShip.position.x = self.size.width / 2
         spaceShip.position.y = spaceShip.size.height + 50
         
@@ -1036,7 +1052,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func mouseDown(with event: NSEvent) {
+        
         self.touchDown(atPoint: event.location(in: self))
+        
+        //  Menu-Button geklickt
+        if atPoint(event.location(in: self)) == menuButtonNode {
+            
+            // Uebergang
+            let transitionEffect = SKTransition.push(with: SKTransitionDirection.down, duration: 3.0)
+            // Szene-Datei laden
+            if let scene = SKScene(fileNamed: "MainMenuScene") {
+                
+                //Szene an View anpassen - im Zweifel SKS bearbeiten
+                scene.scaleMode = .aspectFill
+                
+                // Szene zur View hinzufuegen
+                self.view?.presentScene(scene, transition: transitionEffect)
+                
+            }
+            
+        }
+        
     }
     
     override func mouseDragged(with event: NSEvent) {

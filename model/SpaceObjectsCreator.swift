@@ -11,10 +11,15 @@ class SpaceObjectsCreator {
     
     //  Klassenvariablen
     //
+    //  Benutzereinstellungen
+    var userSettigs: UserDefaults
     
     //  Kontruktor
     init() {
-    
+        
+        //  Benutzereinstellungen
+        userSettigs = UserDefaults.standard
+        
     }
     
     //  interne Funktionen
@@ -22,17 +27,20 @@ class SpaceObjectsCreator {
     private func createNode(objectTyp: UInt32, nodeName: String) -> (SKSpriteNode, String) {
         
         //  Image-(Namen) laden
-        let nodeImageName: String
+        var nodeImageName: String
         //  Version 1.1 aus Optionen laden
         switch objectTyp {
         
-        case NodeTypes.SpaceShip: nodeImageName = "SpaceShip"
-        case NodeTypes.LaserBullet: nodeImageName = "LaserBullet"
-        case NodeTypes.EnemyShip: nodeImageName = "EnemyShip"
-        case NodeTypes.Asteroid: nodeImageName = "Asteroid"
-        case NodeTypes.EnergySatellite: nodeImageName = "EnergySatellite"
-        default:
-            nodeImageName = ""
+        case NodeTypes.SpaceShip:
+            
+            nodeImageName = userSettigs.string(forKey: UserSettingsKeys.spaceShipImageName) ?? SpaceShipImageNames.first!
+            
+            
+        case        NodeTypes.LaserBullet: nodeImageName = "LaserBullet"
+        case        NodeTypes.EnemyShip: nodeImageName = "EnemyShip"
+        case        NodeTypes.Asteroid: nodeImageName = "Asteroid"
+        case        NodeTypes.EnergySatellite: nodeImageName = "EnergySatellite"
+        default:    nodeImageName = ""
         }
         
         //  todo version 1.1: error handling
@@ -67,14 +75,13 @@ class SpaceObjectsCreator {
                 }
                 
             }
-
-        } else {
-            
-            print("Es ist was schief gegangen!")
+            if !nodeArray.isEmpty {
+                
+                node.run(SKAction.repeatForever(SKAction.animate(with: nodeArray, timePerFrame: 0.1)))
+                
+            }
             
         }
-        
-        node.run(SKAction.repeatForever(SKAction.animate(with: nodeArray, timePerFrame: 0.1)))
         
     }
     

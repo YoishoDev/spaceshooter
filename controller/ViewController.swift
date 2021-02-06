@@ -50,20 +50,7 @@ class ViewController: NSViewController {
     //  auf Klick bei Optionen regaieren
     @objc func optionsButtonClicked() {
     
-        //  View per Code erzeugen (S. 525)
-        /*if let optionViewController = storyboard?.instantiateController(withIdentifier: NSStoryboard.SceneIdentifier("OptionsView")) as? OptionsViewController {
-        
-            viewControllerArray.append(optionViewController)
-            viewControllerArray.append(self)
-            self.view.window?.contentViewController = optionViewController
-            
-            
-        } else {
-            
-            print("Controller konnte nicht geladen werden!")
-            
-        }*/
-        
+        //  Seque per Code
         performSegue(withIdentifier: NSStoryboard.SceneIdentifier("OptionsViewSeque"), sender: self)
         
     }
