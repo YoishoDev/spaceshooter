@@ -304,12 +304,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    
     //  Raumschiff vorbereiten
     private func addSpaceShipToScene() {
         
         // "Unser" Schiff
         let spaceShip: SKSpriteNode
-        //  Version 1.1 aus Optionen laden
+        //  Bilder(namen) aus Optionen laden
         let spaceShipImageName = userSettings.string(forKey: UserSettingsKeys.spaceShipImageName)
         if spaceShipImageName != nil {
             
@@ -325,7 +326,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //  Groesse des Raumschiffs in Relation zur Szene
-        
+        spaceShip.size.width = SpaceShipScaleToScene * self.size.width / 100
+        spaceShip.size.height = SpaceShipScaleToScene * self.size.height / 100
         
         //  Schiff in Szene positionieren
         spaceShip.position.x = self.size.width / 2
@@ -452,12 +454,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func moveSpaceShip(direction: UInt32) {
         
         //  Raumschiff aus Szene laden
-        if let spaceShip = self.childNode(withName: NodeNames.spaceShip) {
+        if let spaceShip = self.childNode(withName: NodeNames.spaceShip) as? SKSpriteNode {
         
+            // Richtung
             switch direction {
             
-            case MovingDirection.left: spaceShip.position.x = spaceShip.position.x - 30
-            case MovingDirection.right: spaceShip.position.x = spaceShip.position.x + 30
+            case MovingDirection.left:
+                
+                let newPosX: CGFloat = spaceShip.position.x - 30
+                //  nur wenn das Rauschiff nicht aus der Szene herausfliegen wuerde
+                if newPosX > spaceShip.size.width {
+                    
+                    spaceShip.position.x = newPosX
+                    
+                } else {
+                    
+                    spaceShip.position.x = spaceShip.size.width * 0.5 - 30
+                    
+                }
+                
+            case MovingDirection.right:
+                
+                let newPosX: CGFloat = spaceShip.position.x + 30
+                //  nur wenn das Rauschiff nicht aus der Szene herausfliegen wuerde
+                if newPosX < self.size.width - spaceShip.size.width * 0.5 {
+                    
+                    spaceShip.position.x = newPosX
+                    
+                } else {
+                    
+                    spaceShip.position.x = self.size.width - spaceShip.size.width * 0.5 + 30
+                    
+                }
+                
             default: break
             
             }
