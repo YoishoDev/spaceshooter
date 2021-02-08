@@ -7,6 +7,9 @@
 
 import Foundation
 
+//  Skalierung der Raumschiffe
+internal let SpaceShipScaleToScene: CGFloat = 15.0
+
 //  verfuegbare Raumschiffe
 internal let SpaceShipImageNames: [String] = ["SpaceShip", "SpaceShip1", "SpaceShip2", "SpaceShip3"]
     
