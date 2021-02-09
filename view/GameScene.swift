@@ -204,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             liveNode.position.x = xPosLiveNode + (CGFloat(index) + 1) * liveNode.size.width
             liveNode.position.y = self.size.height - liveNode.size.height + 5
             liveNode.zPosition = 10
-            liveNode.setScale(0.8)
+            liveNode.setScale(NodeScaleFactor)
             //  ueber den Namen koennen wir auf die Nodes zugreifen
             liveNode.name = NodeNames.live + "_\(index)"
             xPosLastLiveNode = liveNode.position.x
@@ -326,8 +326,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         //  Groesse des Raumschiffs in Relation zur Szene
-        spaceShip.size.width = SpaceShipScaleToScene * self.size.width / 100
-        spaceShip.size.height = SpaceShipScaleToScene * self.size.height / 100
+        //  spaceShip.setScale(SpaceShipScaleToScene)
         
         //  Schiff in Szene positionieren
         spaceShip.position.x = self.size.width / 2
@@ -354,9 +353,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let remove = SKAction.removeFromParent()
             enemyShip.run(SKAction.sequence([moveDown,remove]))
             
-            //  skalieren
-            enemyShip.setScale(0.8)
-            
             //  feindliches Raumschiff zur Szene hinzufügen
             self.addChild(enemyShip)
             
@@ -382,7 +378,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             asteroid.run(SKAction.sequence([moveDown,remove]))
             
             //  skalieren
-           asteroid.setScale(0.5)
+           asteroid.setScale(NodeScaleFactor)
             
             //  Asteroiden zur Szene hinzufügen
             self.addChild(asteroid)
@@ -406,7 +402,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             energySatellite.run(SKAction.sequence([moveDown,remove]))
             
             //  skalieren
-            energySatellite.setScale(0.5)
+            energySatellite.setScale(NodeScaleFactor)
             
             //  Energie-Satelliten zur Szene hinzufügen
             self.addChild(energySatellite)
@@ -511,7 +507,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 energyLevelNode.position.x = xPosLEnergyLevelNode + (CGFloat(index) + 1) * energyLevelNode.size.width
                 energyLevelNode.position.y = self.size.height - energyLevelNode.size.height
                 energyLevelNode.zPosition = 10
-                energyLevelNode.setScale(0.8)
+                energyLevelNode.setScale(NodeScaleFactor)
                 //  ueber den Namen koennen wir auf die Nodes zugreifen
                 energyLevelNode.name = NodeNames.energy + "_\(index)"
                 
@@ -563,7 +559,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         energyLevelNode.position.x = lastEnergyLevelNode.position.x + energyLevelNode.size.width
         energyLevelNode.position.y = self.size.height - energyLevelNode.size.height
         energyLevelNode.zPosition = 10
-        energyLevelNode.setScale(0.8)
+        energyLevelNode.setScale(NodeScaleFactor)
         //  ueber den Namen koennen wir auf die Nodes zugreifen
         energyLevelNode.name = NodeNames.energy + "_\(nodeIndex + 1)"
         

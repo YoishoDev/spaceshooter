@@ -29,18 +29,23 @@ class ViewController: NSViewController {
             // Szene-Datei laden
             if let scene = SKScene(fileNamed: "MainMenuScene") {
                 
-                //Szene an View anpassen - im Zweifel SKS bearbeiten
+                //  Szene an View anpassen - im Zweifel SKS bearbeiten
                 scene.scaleMode = .aspectFill
                 
                 // Szene zur View hinzufuegen
                 view.presentScene(scene)
                 
-                //Parameter der View
+                //  Parameter der View
                 skView.ignoresSiblingOrder = true
-                skView.showsFPS = true
-                skView.showsNodeCount = true
-                //Physik anzeigen (debug)
-                //skView.showsPhysics = true
+                
+                //  Debug-Modus
+                if isDebugMode {
+                
+                    skView.showsPhysics = true
+                    skView.showsFPS = true
+                    skView.showsNodeCount = true
+                    
+                }
             }
             
         }

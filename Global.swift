@@ -7,8 +7,12 @@
 
 import Foundation
 
+//  Debugging
+internal let isDebugMode: Bool = false
+
+
 //  Skalierung der Raumschiffe
-internal let SpaceShipScaleToScene: CGFloat = 15.0
+internal let NodeScaleFactor: CGFloat = 0.5
 
 //  verfuegbare Raumschiffe
 internal let SpaceShipImageNames: [String] = ["SpaceShip", "SpaceShip1", "SpaceShip2", "SpaceShip3"]
